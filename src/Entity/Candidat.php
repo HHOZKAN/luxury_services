@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CandidatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -90,8 +92,18 @@ class Candidat
     #[ORM\JoinColumn(nullable: false)]
     private ?media $profil_picture = null;
 
-    #[ORM\ManyToOne(inversedBy: 'candidat')]
-    private ?Candidature $candidature = null;
+    #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Candidature::class, orphanRemoval: true)]
+    private Collection $Candidature;
+
+    public function __construct()
+    {
+        $this->Candidature = new ArrayCollection();
+    }
+
+
+
+  
+
 
     public function getId(): ?int
     {
@@ -364,15 +376,36 @@ class Candidat
         return $this;
     }
 
-    public function getCandidature(): ?Candidature
+    /**
+     * @return Collection<int, Candidature>
+     */
+    public function getCandidature(): Collection
     {
-        return $this->candidature;
+        return $this->Candidature;
     }
 
-    public function setCandidature(?Candidature $candidature): static
+    public function addCandidature(Candidature $candidature): static
     {
-        $this->candidature = $candidature;
+        if (!$this->Candidature->contains($candidature)) {
+            $this->Candidature->add($candidature);
+            $candidature->setCandidat($this);
+        }
 
         return $this;
     }
+
+    public function removeCandidature(Candidature $candidature): static
+    {
+        if ($this->Candidature->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getCandidat() === $this) {
+                $candidature->setCandidat(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+   
 }

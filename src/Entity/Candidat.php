@@ -43,11 +43,6 @@ class Candidat
     #[ORM\Column(length: 255)]
     private ?string $lieu_naissance = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
 
     #[ORM\Column]
     private ?bool $disponibilite = null;
@@ -78,19 +73,19 @@ class Candidat
 
     #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
+    private ?User $user = null;
 
     #[ORM\OneToOne(inversedBy: 'PassportCandidat', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?media $passport = null;
+    private ?Media $passport = null;
 
     #[ORM\OneToOne(inversedBy: 'CvCandidat', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?media $cv = null;
+    private ?Media $cv = null;
 
     #[ORM\OneToOne(inversedBy: 'ProfilPictureCandidat', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?media $profil_picture = null;
+    private ?Media $profil_picture = null;
 
     #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $Candidature;
@@ -218,29 +213,7 @@ class Candidat
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
 
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     public function isDisponibilite(): ?bool
     {
@@ -328,7 +301,7 @@ class Candidat
 
 
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
@@ -340,19 +313,19 @@ class Candidat
         return $this;
     }
 
-    public function getPassport(): ?media
+    public function getPassport(): ?Media
     {
         return $this->passport;
     }
 
-    public function setPassport(media $passport): static
+    public function setPassport(Media $passport): static
     {
         $this->passport = $passport;
 
         return $this;
     }
 
-    public function getCv(): ?media
+    public function getCv(): ?Media
     {
         return $this->cv;
     }
@@ -364,12 +337,12 @@ class Candidat
         return $this;
     }
 
-    public function getProfilPicture(): ?media
+    public function getProfilPicture(): ?Media
     {
         return $this->profil_picture;
     }
 
-    public function setProfilPicture(media $profil_picture): static
+    public function setProfilPicture(Media $profil_picture): static
     {
         $this->profil_picture = $profil_picture;
 

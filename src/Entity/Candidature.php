@@ -18,7 +18,7 @@ class Candidature
  
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
-    private ?emploi $emploi = null;
+    private ?Emploi $emploi = null;
 
     #[ORM\ManyToOne(inversedBy: 'Candidature')]
     #[ORM\JoinColumn(nullable: false)]

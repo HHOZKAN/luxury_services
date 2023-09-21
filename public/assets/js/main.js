@@ -72,3 +72,7 @@ $(".materialize-slider").revolution({
 
 });
 });
+
+onAppReady(function() {
+    $('.preload').remove();
+});

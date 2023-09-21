@@ -20,22 +20,29 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'row_attr'=> [
-                    'class' => 'input-field'],
-                    'label' => 'Email',
+                'row_attr' => [
+                    'class' => 'input-field'
+                ],
+                'label' => 'Email',
+                'attr' => [
                     'id' => 'email',
                     'type' => 'email',
                     'name' => 'email',
-                ])
+                ]
+            ])
             ->add('name', TextType::class, [
                 'row_attr' => [
                     'class' => 'input-field col s12'
                 ],
                 'label' => 'Votre nom',
-                'attr' => ['class' => 'validate',
-            ]
+                'attr' => [
+                    'class' => 'validate',
+                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'row_attr' => [
+                    'class' => 'input-field col s12'
+                ],
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -44,6 +51,9 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
+                'row_attr' => [
+                    'class' => 'input-field col s12'
+                ],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -59,8 +69,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

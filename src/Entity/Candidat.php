@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: CandidatRepository::class)]
 class Candidat
@@ -37,8 +38,7 @@ class Candidat
     #[ORM\Column]
     private ?bool $ispassport = null;
 
-    #[ORM\Column]
-    private ?int $date_naissance = null;
+  
 
     #[ORM\Column(length: 255)]
     private ?string $lieu_naissance = null;
@@ -89,6 +89,9 @@ class Candidat
 
     #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $Candidature;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_naissance = null;
 
     public function __construct()
     {
@@ -189,17 +192,7 @@ class Candidat
         return $this;
     }
 
-    public function getDateNaissance(): ?int
-    {
-        return $this->date_naissance;
-    }
-
-    public function setDateNaissance(int $date_naissance): static
-    {
-        $this->date_naissance = $date_naissance;
-
-        return $this;
-    }
+ 
 
     public function getLieuNaissance(): ?string
     {
@@ -375,6 +368,18 @@ class Candidat
                 $candidature->setCandidat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->date_naissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $date_naissance): static
+    {
+        $this->date_naissance = $date_naissance;
 
         return $this;
     }

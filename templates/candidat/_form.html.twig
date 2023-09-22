@@ -67,28 +67,25 @@
 
 					<div class="card card-panel passport">
 						<div class="file-field input-field">
-							<div class="btn btn-lg primary waves-effect waves-light">
-								<span>
-									<i class="material-icons">&#xE24D;</i>
-									Passport</span>
-								<input id="passport" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="passport" type="file">
+							<div class="btn btn-lg primary waves-effect waves-light" style="width:40%; height:40px">
+								{{ form_row(form.passport) }}
 							</div>
 							<div class="existing-file">
 								<a href="#!" target="_blank">
 									<i class="material-icons">&#xE24D;</i>
-									passeport.jpg</a>
+									{{ candidat.passport is not empty ? candidat.passport : 'No file selected' }}
+								</a>
 							</div>
 							<div class="file-path-wrapper">
 								<input class="file-path validate" type="text" placeholder="Upload your passport" readonly>
 							</div>
 						</div>
 
+
 						<div class="file-field input-field">
 							<div class="btn btn-lg primary waves-effect waves-light">
-								<span>
-									<i class="material-icons">&#xE24D;</i>
-									CV</span>
-								<input id="cv" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="cv" type="file">
+								{{ form_row(form.cv) }}
+
 							</div>
 
 							<div class="existing-file">
@@ -106,27 +103,12 @@
 
 				<div class="col-xs-12 col-sm-6">
 					<div class="col-xs-12 col-sm-12">
-						<div class="input-field" style="margin-top: 5px;">
-							<select id="job_sector" name="job_sector[]" multiple data-placeholder="Type in or Select job sector you would be interested in.">
-								<option value="">Choose an option...</option>
-								<option value="">job sector</option>
-							</select>
-							<label for="job_sector" class="active">Interest in job sector</label>
-						</div>
+						{{ form_row(form.job_categorie) }}
+
 					</div>
 					<div class="col-xs-12 col-sm-12">
-						<div class="input-field">
-							<select id="experience" required="required" name="experience">
-								<option value="">Choose</option>
-								<option value="3m">0 - 6 month</option>
-								<option value="6m">6 month - 1 year</option>
-								<option value="1y">1 - 2 years</option>
-								<option value="2y">2+ years</option>
-								<option value="5y" selected="selected">5+ years</option>
-								<option value="10y">10+ years</option>
-							</select>
-							<label for="experience" class="active">Experience</label>
-						</div>
+						{{ form_row(form.experience) }}
+
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12">

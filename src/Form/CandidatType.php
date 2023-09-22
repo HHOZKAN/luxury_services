@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Candidat;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -86,13 +88,13 @@ class CandidatType extends AbstractType
                 ]
             ])
             // ->add('ispassport')
-            ->add('date_naissance', DateType::class, [
+            ->add('date_naissance', BirthdayType::class, [
                 'label' => 'Date de Naissance',
                 'row_attr' => [
                     'class' => 'input-field',
                 ],
                 'attr' => [
-                    'class' => 'datepicker',
+                    'class' => 'datepicker mt-5',
                     'id' => 'birth_date',
                     'name' => 'birth_date',
                 ]
@@ -118,6 +120,9 @@ class CandidatType extends AbstractType
                     'Tech' => 'Tech',
                     'Education' => 'Education',
                 ],
+                'choice_attr' => [
+                    'class' => 'g-3'
+                ],
                 'label' => 'Catégories de job',
                 'row_attr' => [
                     'class' => 'input-field',
@@ -134,7 +139,7 @@ class CandidatType extends AbstractType
                 ],
                 'label' => 'Experience professionnelle',
                 'row_attr' => [
-                    'class' => 'input-field'
+                    'class' => 'input-field',
                 ]
             ])
             ->add('description', TextareaType::class, [
@@ -149,8 +154,28 @@ class CandidatType extends AbstractType
                     'class' => 'input-field',
             ]
                 ])
-            ->add('passport')
-            ->add('cv')
+            ->add('passport', FileType::class, [
+                'label' => 'Insérez votre passeport',
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'id' => 'passport',
+                    'size' => '200000',
+                    'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
+                    'name' => 'passport',
+            ]
+            ])
+            ->add('cv', FileType::class, [
+                'label' => 'Votre Cv',
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'id' => 'passport',
+                    'size' => '200000',
+                    'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
+                    'name' => 'passport',
+                ]
+            ])
             ->add('profil_picture');
     }
 

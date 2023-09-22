@@ -26,6 +26,7 @@ class CandidatController extends AbstractController
     #[Route('/new', name: 'app_candidat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        
         $candidat = new Candidat();
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
@@ -84,4 +85,5 @@ class CandidatController extends AbstractController
 
         return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

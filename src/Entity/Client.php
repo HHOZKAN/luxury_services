@@ -33,8 +33,6 @@ class Client
     #[ORM\Column(length: 255)]
     private ?string $mail_contact = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $note = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Emploi::class)]
     private Collection $emplois;
@@ -117,18 +115,6 @@ class Client
     public function setMailContact(string $mail_contact): static
     {
         $this->mail_contact = $mail_contact;
-
-        return $this;
-    }
-
-    public function getNote(): ?int
-    {
-        return $this->note;
-    }
-
-    public function setNote(?int $note): static
-    {
-        $this->note = $note;
 
         return $this;
     }

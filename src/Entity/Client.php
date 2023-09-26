@@ -42,6 +42,11 @@ class Client
         $this->emplois = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+       return $this->getId() . ' : ' . $this->getNomSociete();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

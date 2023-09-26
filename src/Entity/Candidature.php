@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Candidat;
 use App\Repository\CandidatureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

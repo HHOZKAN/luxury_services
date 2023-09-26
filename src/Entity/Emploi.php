@@ -55,6 +55,12 @@ class Emploi
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
+        $this->date_create = new \DateTime();
+
+    }
+    
+    public function prePersist()
+    {
     }
 
     public function getId(): ?int

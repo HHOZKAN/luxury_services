@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidat;
+use App\Entity\User;
 use App\Form\CandidatType;
 use App\Repository\CandidatRepository;
 use DateTimeImmutable;
@@ -26,15 +27,36 @@ class CandidatController extends AbstractController
     #[Route('/new', name: 'app_candidat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        
+
+
+
         $candidat = new Candidat();
+
+
+        /**
+        **@var User $user
+         */
+
+        $user = $this->getUser();
+        $candidat = $user->getCandidat();
+
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $candidat->setDateCreate(new DateTimeImmutable());
             $candidat->setDateUptaded(new DateTimeImmutable());
+
+            if ($form['profil_picture']->getData()) {
+                /**
+                 **@var UploadedFile $profilPictureFile 
+                 */
+                $profilPictureFile = $form['profil_picture']->getData();
+                dd($profilPictureFile);
+                $profilPictureFile->move('media/profilPictures', $profilPictureFile->getClientOriginalName());
+            }
             $entityManager->persist($candidat);
             $entityManager->flush();
 
@@ -76,7 +98,7 @@ class CandidatController extends AbstractController
     #[Route('/{id}', name: 'app_candidat_delete', methods: ['POST'])]
     public function delete(Request $request, Candidat $candidat, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$candidat->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $candidat->getId(), $request->request->get('_token'))) {
 
             $candidat->getDateDeleted(new DateTimeImmutable());
             $entityManager->remove($candidat);
@@ -85,5 +107,4 @@ class CandidatController extends AbstractController
 
         return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);
     }
-    
 }

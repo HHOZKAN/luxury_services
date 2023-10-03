@@ -55,9 +55,6 @@ class CandidatType extends AbstractType
             ])
             ->add('adresse', TextType::class, [
                 'label' => 'adresse',
-                'row_attr' => [
-                    'class' => 'input-field',
-                ],
                 'attr' => [
                     'class' => 'form-control',
                     'id' => 'address',
@@ -155,7 +152,6 @@ class CandidatType extends AbstractType
             ]
                 ])
             ->add('passport', FileType::class, [
-                'label' => 'Insérez votre passeport',
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
@@ -166,7 +162,6 @@ class CandidatType extends AbstractType
             ]
             ])
             ->add('cv', FileType::class, [
-                'label' => 'Votre Cv',
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
@@ -176,7 +171,16 @@ class CandidatType extends AbstractType
                     'name' => 'passport',
                 ]
             ])
-            ->add('profil_picture');
+            ->add('profil_picture' , FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'id' => 'photo',
+                    'size' => '200000',
+                    'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
+                    'name' => 'prhoto',
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

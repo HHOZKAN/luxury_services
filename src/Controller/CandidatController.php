@@ -28,7 +28,7 @@ class CandidatController extends AbstractController
 
 
         /**
-        **@var User $user
+         **@var User $user
          */
 
         $user = $this->getUser();
@@ -40,22 +40,21 @@ class CandidatController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-         
+
 
             if ($form['profil_picture']->getData()) {
                 /**
                  **@var UploadedFile $profilPictureFile 
                  */
                 $profilPictureFile = $form['profil_picture']->getData();
-
                 $profilPictureName = Uuid::v7();
 
                 $extension = $profilPictureFile->guessExtension();
-                if(!$extension) {
-                    $extension ='png';
+                if (!$extension) {
+                    $extension = 'png';
                 }
 
-                $profilPictureName = $profilPictureName . '.' .$extension;
+                $profilPictureName = $profilPictureName . '.' . $extension;
 
                 $profilPictureFile->move('media/profilPictures', $profilPictureName);
 
@@ -66,59 +65,67 @@ class CandidatController extends AbstractController
                 $entityManager->persist($profilPictureMedia);
 
                 $candidat->setProfilPicture($profilPictureMedia);
+                $entityManager->persist($candidat);
+
             }
-            if ($form['profil_picture
-            ']->getData()) {
+
+
+            if ($form['cv']->getData()) {
                 /**
-                 **@var UploadedFile $profilPictureFile 
+                 **@var UploadedFile $cvPictureFile 
                  */
-                $profilPictureFile = $form['profil_picture']->getData();
+                $cvPictureFile = $form['cv']->getData();
+                $cvPictureName = Uuid::v7();
 
-                $profilPictureName = Uuid::v7();
-
-                $extension = $profilPictureFile->guessExtension();
-                if(!$extension) {
-                    $extension ='png';
+                $extension = $cvPictureFile->guessExtension();
+                if (!$extension) {
+                    $extension = 'png';
                 }
 
-                $profilPictureName = $profilPictureName . '.' .$extension;
+                $cvPictureName = $cvPictureName . '.' . $extension;
 
-                $profilPictureFile->move('media/profilPictures', $profilPictureName);
+                $cvPictureFile->move('media/cvPictures', $cvPictureName);
 
-                $profilPictureMedia = new Media();
-                $profilPictureMedia->setUrl($profilPictureName);
-                $profilPictureMedia->setOriginalName($profilPictureFile->getClientOriginalName());
+                $cvPictureMedia = new Media();
+                $cvPictureMedia->setUrl($cvPictureName);
+                $cvPictureMedia->setOriginalName($cvPictureFile->getClientOriginalName());
 
-                $entityManager->persist($profilPictureMedia);
+                $entityManager->persist($cvPictureMedia);
 
-                $candidat->setProfilPicture($profilPictureMedia);
+                $candidat->setCv($cvPictureMedia);
+                $entityManager->persist($candidat);
+
             }
-            if ($form['profil_picture']->getData()) {
+
+
+            if ($form['passport']->getData()) {
                 /**
-                 **@var UploadedFile $profilPictureFile 
+                 **@var UploadedFile $passportPictureFile
                  */
-                $profilPictureFile = $form['profil_picture']->getData();
+                $passportPictureFile = $form['passport']->getData();
 
-                $profilPictureName = Uuid::v7();
+                $passportPictureName = Uuid::v7();
 
-                $extension = $profilPictureFile->guessExtension();
-                if(!$extension) {
-                    $extension ='png';
+                $extension = $passportPictureFile->guessExtension();
+                if (!$extension) {
+                    $extension = 'png';
                 }
 
-                $profilPictureName = $profilPictureName . '.' .$extension;
+                $passportPictureName = $passportPictureName . '.' . $extension;
 
-                $profilPictureFile->move('media/profilPictures', $profilPictureName);
+                $passportPictureFile->move('media/passportPictures', $passportPictureName);
 
-                $profilPictureMedia = new Media();
-                $profilPictureMedia->setUrl($profilPictureName);
-                $profilPictureMedia->setOriginalName($profilPictureFile->getClientOriginalName());
+                $passportPictureMedia = new Media();
+                $passportPictureMedia->setUrl($passportPictureName);
+                $passportPictureMedia->setOriginalName($passportPictureFile->getClientOriginalName());
 
-                $entityManager->persist($profilPictureMedia);
+                $entityManager->persist($passportPictureMedia);
 
-                $candidat->setProfilPicture($profilPictureMedia);
+                $candidat->setPassport($passportPictureMedia);
+                $entityManager->persist($candidat);
+
             }
-            $entityManager->persist($candidat);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_candidat_new');
@@ -129,5 +136,4 @@ class CandidatController extends AbstractController
             'form' => $form,
         ]);
     }
-
 }

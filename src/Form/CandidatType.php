@@ -24,8 +24,8 @@ class CandidatType extends AbstractType
                 'label' => 'genre',
                 'choices' => [
                     'Choose an option' => null,
-                    'Homme' => true,
-                    'Femme' => false,
+                    'Homme' => "Homme",
+                    'Femme' => 'Femme',
                 ],
                 'row_attr' => [
                     'class' => 'input-field',

@@ -3,8 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Candidat;
+use DateTime;
+
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -85,13 +86,16 @@ class CandidatType extends AbstractType
                 ]
             ])
             // ->add('ispassport')
-            ->add('date_naissance', BirthdayType::class, [
+            ->add('date_naissance', DateType::class, [
+                'input' => 'datetime_immutable',
+                // 'html5' => false,
+                'widget' => 'single_text' ,
                 'label' => 'Date de Naissance',
                 'row_attr' => [
                     'class' => 'input-field',
                 ],
                 'attr' => [
-                    'class' => 'datepicker mt-5',
+                    'class' => 'datepicker',
                     'id' => 'birth_date',
                     'name' => 'birth_date',
                 ]
@@ -178,7 +182,7 @@ class CandidatType extends AbstractType
                     'id' => 'photo',
                     'size' => '200000',
                     'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
-                    'name' => 'prhoto',
+                    'name' => 'photo',
                 ]
             ]);
     }

@@ -5,25 +5,25 @@
                         <h3 class="text-extrabold">Your personal informations</h3>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="input-field">
-                                {{ form_row(form.genre) }}
+                                {{ form_widget(form.genre) }}
                                 <label for="gender" class="active">Gender</label>
                             </div>
                         </div>
                         <div class="clearfix visible-sm"></div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="input-field">
-                                {{ form_row(form.nom) }}
+                                {{ form_widget(form.nom) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="input-field">
-                                {{ form_row(form.prenom) }}
+                                {{ form_widget(form.prenom) }}
 
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-8">
                             <div class="input-field">
-                                {{ form_row(form.adresse) }}
+                                {{ form_widget(form.adresse) }}
                             </div>
                         </div>
                     </div>
@@ -35,16 +35,20 @@
                                  style="margin-top: 32px;">
                                 <div class="btn btn-lg primary waves-effect waves-light">
                                     <span><i class="material-icons">insert_photo</i> Photo</span>
-                                    {{ form_row(form.profil_picture) }}
+                                    {{ form_widget(form.profil_picture) }}
                                     <!-- <input id="photo" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="photo" type="file"> -->
                                 </div>
 
+                                {% if candidat.profilPicture %}
+
                                 <div class="existing-file">
-                                    <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> profil_picture.jpg</a>
+                                    <a href="{{ asset ('media/profilPictures/') }} {{ candidat.profilPicture.url }}" target="_blank"><i class="material-icons">&#xE24D;</i>
+                                    {{ candidat.profilPicture.originalName }}</a>
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -53,25 +57,25 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="input-field">
-                                        {{ form_row(form.pays) }}
+                                        {{ form_widget(form.pays) }}
 
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="input-field">
-                                        {{ form_row(form.nationalite) }}
+                                        {{ form_widget(form.nationalite) }}
 
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="input-field">
-                                        {{ form_row(form.date_naissance) }}
+                                        {{ form_widget(form.date_naissance) }}
 
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="input-field">
-                                        {{ form_row(form.lieu_naissance) }}
+                                        {{ form_widget(form.lieu_naissance) }}
 
                                     </div>
                                 </div>
@@ -86,7 +90,7 @@
                                 <div class="file-field input-field">
                                     <div class="btn btn-lg primary waves-effect waves-light">
                                         <span><i class="material-icons">&#xE24D;</i> Passport</span>
-                                        {{ form_row(form.passport) }}
+                                        {{ form_widget(form.passport) }}
                                     </div>
                                     <div class="existing-file">
                                         <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> passeport.jpg</a>
@@ -99,7 +103,7 @@
                                 <div class="file-field input-field">
                                     <div class="btn btn-lg primary waves-effect waves-light">
                                         <span><i class="material-icons">&#xE24D;</i> CV</span>
-                                        {{ form_row(form.cv) }}
+                                        {{ form_widget(form.cv) }}
                                     </div>
 
                                     <div class="existing-file">
@@ -116,21 +120,21 @@
                         <div class="col-xs-12 col-sm-6">
                             <div class="col-xs-12 col-sm-12">
                                 <div class="input-field" style="margin-top: 5px;">
-                                    {{ form_row(form.job_categorie) }}
+                                    {{ form_widget(form.job_categorie) }}
 
                                     <label for="job_sector" class="active">Interest in job sector</label>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12">
                                 <div class="input-field">
-                                    {{ form_row(form.experience) }}
+                                    {{ form_widget(form.experience) }}
                                     <label for="experience" class="active">Experience</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12">
                             <div class="input-field">
-                                {{ form_row(form.description) }}
+                                {{ form_widget(form.description) }}
                             </div>
                         </div>
                     </div>

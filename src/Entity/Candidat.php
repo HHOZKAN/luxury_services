@@ -17,90 +17,81 @@ class Candidat
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $genre = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $pays = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $nationalite = null;
 
-    #[ORM\Column]
-    private ?bool $ispassport = null;
 
-  
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lieu_naissance = null;
 
 
-    #[ORM\Column]
-    private ?bool $disponibilite = null;
-
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $job_categorie = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $experience = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_create = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_uptaded = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_deleted = null;
 
- 
 
 
-
-
-
-    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
 
     #[ORM\OneToOne(inversedBy: 'PassportCandidat', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Media $passport = null;
 
     #[ORM\OneToOne(inversedBy: 'CvCandidat', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Media $cv = null;
 
     #[ORM\OneToOne(inversedBy: 'ProfilPictureCandidat', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Media $profil_picture = null;
 
     #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $Candidature;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_naissance = null;
+
+
+    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
+
+    #[ORM\Column( nullable: true)]
+    private ?\DateTimeImmutable $date_naissance = null;
+
+
+
 
     public function __construct()
     {
         $this->Candidature = new ArrayCollection();
     }
-
-
-
-  
 
 
     public function getId(): ?int
@@ -113,7 +104,7 @@ class Candidat
         return $this->genre;
     }
 
-    public function setGenre(string $genre): static
+    public function setGenre(?string $genre): static
     {
         $this->genre = $genre;
 
@@ -125,7 +116,7 @@ class Candidat
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(?string $nom): static
     {
         $this->nom = $nom;
 
@@ -137,7 +128,7 @@ class Candidat
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(?string $prenom): static
     {
         $this->prenom = $prenom;
 
@@ -149,7 +140,7 @@ class Candidat
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): static
+    public function setAdresse(?string $adresse): static
     {
         $this->adresse = $adresse;
 
@@ -161,7 +152,7 @@ class Candidat
         return $this->pays;
     }
 
-    public function setPays(string $pays): static
+    public function setPays(?string $pays): static
     {
         $this->pays = $pays;
 
@@ -173,21 +164,9 @@ class Candidat
         return $this->nationalite;
     }
 
-    public function setNationalite(string $nationalite): static
+    public function setNationalite(?string $nationalite): static
     {
         $this->nationalite = $nationalite;
-
-        return $this;
-    }
-
-    public function isIspassport(): ?bool
-    {
-        return $this->ispassport;
-    }
-
-    public function setIspassport(bool $ispassport): static
-    {
-        $this->ispassport = $ispassport;
 
         return $this;
     }
@@ -199,7 +178,7 @@ class Candidat
         return $this->lieu_naissance;
     }
 
-    public function setLieuNaissance(string $lieu_naissance): static
+    public function setLieuNaissance(?string $lieu_naissance): static
     {
         $this->lieu_naissance = $lieu_naissance;
 
@@ -207,25 +186,12 @@ class Candidat
     }
 
 
-
-    public function isDisponibilite(): ?bool
-    {
-        return $this->disponibilite;
-    }
-
-    public function setDisponibilite(bool $disponibilite): static
-    {
-        $this->disponibilite = $disponibilite;
-
-        return $this;
-    }
-
     public function getJobCategorie(): ?string
     {
         return $this->job_categorie;
     }
 
-    public function setJobCategorie(string $job_categorie): static
+    public function setJobCategorie(?string $job_categorie): static
     {
         $this->job_categorie = $job_categorie;
 
@@ -237,7 +203,7 @@ class Candidat
         return $this->experience;
     }
 
-    public function setExperience(string $experience): static
+    public function setExperience(?string $experience): static
     {
         $this->experience = $experience;
 
@@ -249,7 +215,7 @@ class Candidat
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -261,7 +227,7 @@ class Candidat
         return $this->date_create;
     }
 
-    public function setDateCreate(\DateTimeInterface $date_create): static
+    public function setDateCreate(?\DateTimeInterface $date_create): static
     {
         $this->date_create = $date_create;
 
@@ -273,7 +239,7 @@ class Candidat
         return $this->date_uptaded;
     }
 
-    public function setDateUptaded(\DateTimeInterface $date_uptaded): static
+    public function setDateUptaded(?\DateTimeInterface $date_uptaded): static
     {
         $this->date_uptaded = $date_uptaded;
 
@@ -285,7 +251,7 @@ class Candidat
         return $this->date_deleted;
     }
 
-    public function setDateDeleted(\DateTimeInterface $date_deleted): static
+    public function setDateDeleted(?\DateTimeInterface $date_deleted): static
     {
         $this->date_deleted = $date_deleted;
 
@@ -294,24 +260,12 @@ class Candidat
 
 
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(user $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getPassport(): ?Media
     {
         return $this->passport;
     }
 
-    public function setPassport(Media $passport): static
+    public function setPassport(?Media $passport): static
     {
         $this->passport = $passport;
 
@@ -323,7 +277,7 @@ class Candidat
         return $this->cv;
     }
 
-    public function setCv(media $cv): static
+    public function setCv(?media $cv): static
     {
         $this->cv = $cv;
 
@@ -335,7 +289,7 @@ class Candidat
         return $this->profil_picture;
     }
 
-    public function setProfilPicture(Media $profil_picture): static
+    public function setProfilPicture(?Media $profil_picture): static
     {
         $this->profil_picture = $profil_picture;
 
@@ -372,17 +326,32 @@ class Candidat
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(User $User): static
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeImmutable
     {
         return $this->date_naissance;
     }
 
-    public function setDateNaissance(\DateTimeInterface $date_naissance): static
+    public function setDateNaissance(?\DateTimeImmutable $date_naissance): static
     {
         $this->date_naissance = $date_naissance;
 
         return $this;
     }
+
+
 
 
    

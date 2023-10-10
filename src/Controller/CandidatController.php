@@ -41,7 +41,8 @@ class CandidatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-
+            $allConditionsMet = true;
+            
             if ($form['profil_picture']->getData()) {
                 /**
                  **@var UploadedFile $profilPictureFile 
@@ -67,6 +68,8 @@ class CandidatController extends AbstractController
                 $candidat->setProfilPicture($profilPictureMedia);
                 $entityManager->persist($candidat);
 
+            } else {
+                $allConditionsMet = false;
             }
 
 
@@ -95,6 +98,8 @@ class CandidatController extends AbstractController
                 $candidat->setCv($cvPictureMedia);
                 $entityManager->persist($candidat);
 
+            } else {
+                $allConditionsMet = false; // Si cette condition n'est pas remplie, définissez la variable à false
             }
 
 
@@ -124,8 +129,15 @@ class CandidatController extends AbstractController
                 $candidat->setPassport($passportPictureMedia);
                 $entityManager->persist($candidat);
 
+            } else {
+                $allConditionsMet = false; // Si cette condition n'est pas remplie, définissez la variable à false
             }
 
+
+            // if ($allConditionsMet) {
+            //     // $user->setRoles(['ROLE_CANDIDAT']);
+            //     // $entityManager->persist($user);
+            // }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_candidat_new');

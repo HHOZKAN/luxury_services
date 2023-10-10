@@ -169,10 +169,10 @@ class CandidatType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'id' => 'passport',
+                    'id' => 'cv',
                     'size' => '200000',
                     'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
-                    'name' => 'passport',
+                    'name' => 'cv',
                 ]
             ])
             ->add('profil_picture' , FileType::class, [

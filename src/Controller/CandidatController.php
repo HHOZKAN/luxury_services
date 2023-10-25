@@ -22,8 +22,6 @@ class CandidatController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-
-
         $candidat = new Candidat();
 
 

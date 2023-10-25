@@ -9,7 +9,8 @@
 		{% block link %}{% endblock %}
 
 
-		{% block javascriptshaut %}{% endblock %}
+		{% block javascriptshaut %}
+		{% endblock %}
 
 		{% block style %}{% endblock %}
 	</head>
@@ -108,13 +109,13 @@
 									</a>
 								</li>
 								<li class=" dropdown">
-									{# <a target="_self" href="/templates/compagny.html"> #}
+									<a target="_self" href="{{ path ('app_company') }}">
 										<i class=""></i>
 										<span>About us</span>
 									</a>
 								</li>
 								<li class=" dropdown">
-									{# <a target="_self" href="{{ path ('app_candidature') }}"> #}
+									<a target="_self" href="{{ path ('app_contact') }}">
 										<i class=""></i>
 										<span>Contact</span>
 									</a>
@@ -183,17 +184,17 @@
 							</a>
 						</li>
 						<li class=" dropdown">
-							<a target="_self" href="/template/jobs/jobs.html">
+							<a target="_self" href="{{ path ('app_candidature') }}">
 								<span>Jobs offers</span>
 							</a>
 						</li>
 						<li class=" dropdown">
-							<a target="_self" href="/templates/compagny.html">
+							<a target="_self" href="{{ path ('app_company') }}">
 								<span>About us</span>
 							</a>
 						</li>
 						<li class=" dropdown">
-							<a target="_self" href="/templates/contact.html">
+							<a target="_self" href="{{ path ('app_contact') }}">
 								<span>Contact</span>
 							</a>
 						</li>

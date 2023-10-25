@@ -29,6 +29,7 @@ class CandidatureController extends AbstractController
         return $this->render('candidature/index.html.twig', [
             'emplois' => $emplois,
         ]);
+        
     }
 
     #[Route('/detail/{id}', name: 'app_candidature_detail', methods: ['GET', 'POST'])]
